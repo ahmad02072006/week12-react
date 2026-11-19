@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ShoppingCart from './components/ShoppingCart';
 import CounterWithHistory from './components/CounterWithHistory';
 import TodoList from './components/TodoList';
@@ -8,13 +9,16 @@ import Countdown from './components/Countdown';
 const bandWords = ['SNEAKERS', 'TRENDING', 'NEW ARRIVALS', '20% DISCOUNT'];
 
 function Band({ className }) {
-  const items = [...bandWords, ...bandWords, ...bandWords, ...bandWords];
   return (
     <div className={`band ${className}`} aria-hidden="true">
       <div className="band-track">
-        {items.map((word, i) => (
-          <span key={`${word}-${i}`}>
-            {word} <b>✱</b>
+        {['first', 'second'].map((copy) => (
+          <span className="band-copy" key={copy}>
+            {bandWords.map((word) => (
+              <span className="band-word" key={word}>
+                {word} <b>✱</b>
+              </span>
+            ))}
           </span>
         ))}
       </div>
@@ -33,43 +37,50 @@ function Section({ id, title, subtitle, children }) {
 }
 
 function App() {
+  const [cartCount, setCartCount] = useState(0);
+
   return (
     <>
       <a className="skip" href="#main-content">Skip to content</a>
 
       <header className="top">
         <div className="container top-inner">
-          <a className="logo" href="#home">● StrideLab</a>
-          <nav className="pill-nav" aria-label="Main">
+          <a className="logo" href="#home" aria-label="StrideLab home">
+            <span className="logo-mark" aria-hidden="true">S</span>
+            StrideLab
+          </a>
+          <nav className="pill-nav" aria-label="Main navigation">
             <a href="#home">Home</a>
             <a href="#collections">Collections</a>
-            <a href="#cart">Shop</a>
-            <a href="#demos">Demos</a>
+            <a href="#shop">Shop</a>
+            <a href="#contact">Contact</a>
           </nav>
-          <a className="cart-chip" href="#cart">Cart ↗</a>
+          <a className="cart-chip" href="#cart" aria-label={`View cart, ${cartCount} items`}>
+            <span aria-hidden="true">↗</span> {cartCount} items
+          </a>
         </div>
       </header>
 
       <main id="main-content">
         <section id="home" className="container">
           <div className="hero">
+            <p className="hero-kicker">StrideLab / Find your next favorite</p>
             <h1>
-              <span className="hero-accent">Unleash</span> your
-              <br />
-              unique sneaker identity
+              <span className="hero-accent">Unleash</span> your unique
+              <br className="desktop-break" /> sneaker identity
             </h1>
-            <a className="shop-now" href="#cart">
-              <span>↗</span>
+            <a className="shop-now" href="#shop" aria-label="Shop the sneaker collection">
+              <span aria-hidden="true">↗</span>
               SHOP NOW
             </a>
             <img
               className="hero-img"
-              src="https://placehold.co/420x260/7c6df0/ffffff?text=Sneaker"
-              alt="Featured sneaker"
+              src="https://placehold.co/900x640/211b3c/ffe531?text=StrideLab+Sneaker+Drop"
+              alt="Featured sneaker from the StrideLab collection"
             />
             <p className="hero-text">
-              Explore diverse sneaker collections, express yourself through limited
-              editions, and stand out with a style that is entirely yours.
+              Sneakers made for wherever your day takes you. Find your fit, make
+              your mark, and move your own way.
             </p>
           </div>
         </section>
@@ -83,32 +94,50 @@ function App() {
           <h2 className="big-title">Explore our unique collections.</h2>
           <div className="collections">
             <article className="coll coll-dark">
-              <h3>Save up to 50% on sneakers this season</h3>
-              <p>Discounts on a wide selection. Limited time offer!</p>
-              <a className="pill-btn" href="#cart">View details</a>
+              <div>
+                <p className="coll-label">THE STRIDELAB EDIT</p>
+                <h3>Fresh pairs. Better prices.</h3>
+                <p>Find your new everyday favorite in this week's handpicked deals.</p>
+              </div>
+              <a className="pill-btn" href="#shop">Explore deals</a>
             </article>
             <article className="coll coll-yellow">
-              <h3>Men's Collections.</h3>
-              <p>Explore the latest men's fashion trends.</p>
-              <a className="pill-btn" href="#cart">Shop now</a>
+              <div className="coll-copy">
+                <p className="coll-label">MADE TO MOVE</p>
+                <h3>Men's collection</h3>
+                <p>Everyday comfort with a little extra edge.</p>
+                <a className="pill-btn" href="#shop">Shop men's</a>
+              </div>
+              <img
+                src="https://placehold.co/520x380/f5b92e/0b0720?text=Men%27s+Sneakers"
+                alt="Men's sneaker collection"
+                loading="lazy"
+              />
             </article>
             <article className="coll coll-lav">
-              <h3>Women's Collections.</h3>
-              <p>Explore the latest women's fashion trends.</p>
-              <a className="pill-btn" href="#cart">Shop now</a>
+              <div className="coll-copy">
+                <p className="coll-label">OWN YOUR PACE</p>
+                <h3>Women's collection</h3>
+                <p>Fresh colors and easy comfort for every day.</p>
+                <a className="pill-btn" href="#shop">Shop women's</a>
+              </div>
+              <img
+                src="https://placehold.co/520x380/d8d5f3/0b0720?text=Women%27s+Sneakers"
+                alt="Women's sneaker collection"
+                loading="lazy"
+              />
             </article>
           </div>
         </section>
 
-        <section className="container deals">
+        <section id="shop" className="container deals">
           <Countdown />
-          <h2 className="big-title">Best deals of the week!</h2>
+          <h2 className="big-title">Best deals of the week</h2>
           <Section
-            id="cart"
-            title="Interactive Shopping Cart"
-            subtitle="Add items, change quantities, and watch the total update."
+            title="Find your stride"
+            subtitle="Six fresh picks. Add a pair, adjust the quantity, and watch your total update."
           >
-            <ShoppingCart />
+            <ShoppingCart onCartCountChange={setCartCount} />
           </Section>
         </section>
 
@@ -132,9 +161,11 @@ function App() {
       </main>
 
       <footer className="footer">
-        <div className="container">
-          <p className="footer-big">StrideLab · Walk your own way</p>
-          <p>Built by Ahmad · Web Programming K0126_002 · Week 12</p>
+        <div id="contact" className="container">
+          <p className="footer-kicker">STEP INTO YOUR NEXT FAVORITE</p>
+          <p className="footer-big">StrideLab. Walk your own way.</p>
+          <a className="footer-link" href="mailto:hello@stridelab.example">Contact the StrideLab team</a>
+          <p className="footer-note">© StrideLab · Made for wherever you're headed.</p>
         </div>
       </footer>
     </>

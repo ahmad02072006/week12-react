@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { products } from '../data/products';
 
 const money = (n) => `$${n.toFixed(2)}`;
@@ -6,20 +6,31 @@ const money = (n) => `$${n.toFixed(2)}`;
 function ProductCard({ product, qtyInCart, onAdd, onRemove }) {
   return (
     <article className="product">
-      <img src={product.image} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p className="price">{money(product.price)}</p>
-      <div className="row">
-        <button className="btn" onClick={() => onAdd(product)}>
-          Add to cart
+      <div className="product-image-wrap">
+        <img src={product.image} alt={`${product.name} sneaker`} loading="lazy" />
+        <span className="discount-badge">{product.discount}</span>
+      </div>
+      <div className="product-details">
+        <div>
+          <h3>{product.name}</h3>
+          <p className="price">{money(product.price)}</p>
+        </div>
+        <button
+          className="add-button"
+          onClick={() => onAdd(product)}
+          aria-label={`Add ${product.name} to cart`}
+        >
+          <span aria-hidden="true">+</span>
         </button>
+      </div>
+      <div className="product-actions">
         {qtyInCart > 0 && (
-          <button className="btn btn-ghost" onClick={() => onRemove(product.id)}>
-            Remove
+          <button className="link-btn" onClick={() => onRemove(product.id)}>
+            Remove from cart
           </button>
         )}
+        {qtyInCart > 0 && <small aria-live="polite">In cart: {qtyInCart}</small>}
       </div>
-      {qtyInCart > 0 && <small>In cart: {qtyInCart}</small>}
     </article>
   );
 }
@@ -42,7 +53,7 @@ function CartItem({ item, onIncrease, onDecrease }) {
   );
 }
 
-function ShoppingCart() {
+function ShoppingCart({ onCartCountChange }) {
   // State: an ARRAY of cart items -> { ...product, qty }
   const [cart, setCart] = useState([]);
 
@@ -76,6 +87,10 @@ function ShoppingCart() {
   const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
   const totalPrice = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
+  useEffect(() => {
+    onCartCountChange(totalItems);
+  }, [onCartCountChange, totalItems]);
+
   return (
     <div className="shop">
       <div className="product-grid">
@@ -90,7 +105,7 @@ function ShoppingCart() {
         ))}
       </div>
 
-      <aside className="cart" aria-label="Shopping cart">
+      <aside id="cart" className="cart" aria-label="Shopping cart">
         <h3>Your Cart ({totalItems})</h3>
         {cart.length === 0 ? (
           <p className="muted">Your cart is empty.</p>
