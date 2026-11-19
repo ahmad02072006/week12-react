@@ -5,6 +5,7 @@ import TodoList from './components/TodoList';
 import SearchPage from './components/SearchPage';
 import WordCount from './components/WordCount';
 import Countdown from './components/Countdown';
+import ShoeImage from './components/ShoeImage';
 
 const bandWords = ['SNEAKERS', 'TRENDING', 'NEW ARRIVALS', '20% DISCOUNT'];
 
@@ -73,10 +74,11 @@ function App() {
               <span aria-hidden="true">↗</span>
               SHOP NOW
             </a>
-            <img
+            <ShoeImage
               className="hero-img"
-              src="https://placehold.co/900x640/211b3c/ffe531?text=StrideLab+Sneaker+Drop"
-              alt="Featured sneaker from the StrideLab collection"
+              src="https://images.pexels.com/photos/13450843/pexels-photo-13450843.jpeg?cs=tinysrgb&dpr=1&w=500"
+              alt="Blue sports sneaker photographed on an urban concrete surface"
+              loading="eager"
             />
             <p className="hero-text">
               Sneakers made for wherever your day takes you. Find your fit, make
@@ -96,10 +98,15 @@ function App() {
             <article className="coll coll-dark">
               <div>
                 <p className="coll-label">THE STRIDELAB EDIT</p>
-                <h3>Fresh pairs. Better prices.</h3>
-                <p>Find your new everyday favorite in this week's handpicked deals.</p>
+                <h3>Save up to 50% on sneakers</h3>
+                <p>Find a fresh favorite in this week's handpicked deals.</p>
               </div>
               <a className="pill-btn" href="#shop">Explore deals</a>
+              <ShoeImage
+                className="coll-promo-img"
+                src="https://images.pexels.com/photos/31451018/pexels-photo-31451018/free-photo-of-stylish-casual-sneakers-on-wooden-background.jpeg?cs=tinysrgb&dpr=1&w=500"
+                alt="Casual sneakers arranged on a wooden floor"
+              />
             </article>
             <article className="coll coll-yellow">
               <div className="coll-copy">
@@ -108,10 +115,10 @@ function App() {
                 <p>Everyday comfort with a little extra edge.</p>
                 <a className="pill-btn" href="#shop">Shop men's</a>
               </div>
-              <img
-                src="https://placehold.co/520x380/f5b92e/0b0720?text=Men%27s+Sneakers"
-                alt="Men's sneaker collection"
-                loading="lazy"
+              <ShoeImage
+                className="collection-img"
+                src="https://images.pexels.com/photos/14188893/pexels-photo-14188893.jpeg?cs=tinysrgb&dpr=1&w=500"
+                alt="Men's sneakers styled with casual denim"
               />
             </article>
             <article className="coll coll-lav">
@@ -121,10 +128,10 @@ function App() {
                 <p>Fresh colors and easy comfort for every day.</p>
                 <a className="pill-btn" href="#shop">Shop women's</a>
               </div>
-              <img
-                src="https://placehold.co/520x380/d8d5f3/0b0720?text=Women%27s+Sneakers"
-                alt="Women's sneaker collection"
-                loading="lazy"
+              <ShoeImage
+                className="collection-img"
+                src="https://images.pexels.com/photos/20031111/pexels-photo-20031111/free-photo-of-close-up-of-woman-wearing-pink-sneakers.jpeg?cs=tinysrgb&dpr=1&w=500"
+                alt="Woman wearing pink sneakers with blue jeans"
               />
             </article>
           </div>

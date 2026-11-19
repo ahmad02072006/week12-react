@@ -192,7 +192,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   top: 120px;
   right: 24px;
   width: min(46%, 530px);
-  height: 320px;
+  aspect-ratio: 4 / 3;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 22px;
   object-fit: cover;
@@ -307,11 +307,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .coll h3 { margin-bottom: 8px; font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.15; }
 .coll p:not(.coll-label) { max-width: 240px; margin-bottom: 18px; font-size: 13px; }
 .coll-label { margin-bottom: 12px; font-size: 10px; letter-spacing: 0.14em; }
-.coll-dark { align-items: flex-start; flex-direction: column; justify-content: space-between; background: var(--navy); color: var(--white); }
+.coll-dark { min-height: 340px; align-items: flex-start; flex-direction: column; justify-content: space-between; background: var(--navy); color: var(--white); }
 .coll-dark .coll-label { color: var(--yellow); }
 .coll-yellow { background: var(--yellow); }
 .coll-lav { background: var(--lav); }
-.coll-yellow img, .coll-lav img { width: 42%; height: 184px; align-self: flex-end; border-radius: 16px; object-fit: cover; }
+.collection-img { width: 42%; aspect-ratio: 4 / 3; align-self: flex-end; border-radius: 16px; object-fit: cover; }
+.coll-promo-img { width: 100%; aspect-ratio: 3 / 1; border-radius: 14px; object-fit: cover; }
 
 .pill-btn {
   display: inline-flex;
@@ -375,7 +376,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .product:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(11, 7, 32, 0.12); }
 .product-image-wrap { position: relative; overflow: hidden; border-radius: 13px; background: var(--lav); }
-.product-image-wrap img { width: 100%; height: 145px; object-fit: cover; }
+.product-image-wrap img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
 .discount-badge {
   position: absolute;
@@ -463,7 +464,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .pill-nav { gap: 0; }
   .pill-nav a { padding-inline: 12px; }
   .collections { grid-template-columns: 1fr 1fr; }
-  .coll-dark { grid-column: 1 / -1; min-height: 190px; }
+  .coll-dark { grid-column: 1 / -1; min-height: 340px; }
   .shop { grid-template-columns: minmax(0, 1fr) 280px; }
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -481,7 +482,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-kicker { margin-bottom: 15px; }
   .hero h1 { font-size: clamp(2.65rem, 12vw, 4.3rem); }
   .desktop-break { display: none; }
-  .hero-img { top: auto; right: 16px; bottom: 112px; width: 78%; height: 230px; }
+  .hero-img { top: auto; right: 16px; bottom: 112px; width: 78%; }
   .shop-now { right: auto; bottom: 52px; left: 22px; width: 104px; height: 104px; font-size: 16px; }
   .shop-now span { margin-bottom: 3px; font-size: 19px; }
   .hero-text { right: 20px; bottom: 28px; width: calc(100% - 150px); font-size: 11px; }
@@ -495,14 +496,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .collections { gap: 12px; }
   .coll { min-height: 210px; padding: 20px; }
   .coll-dark { grid-column: auto; }
-  .coll-yellow img, .coll-lav img { width: 40%; height: 150px; }
+  .collection-img { width: 40%; }
   .deals { margin-top: 34px; }
   .countdown { flex-direction: column; gap: 2px; padding: 12px; }
   .section { padding: 18px 14px; }
   .section h2 { font-size: 1.4rem; }
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .product { padding: 8px; }
-  .product-image-wrap img { height: 130px; }
   .product h3 { font-size: 12px; }
   .price { font-size: 13px; }
   .add-button { width: 35px; height: 35px; }
@@ -511,10 +511,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 @media (max-width: 390px) {
   .hero { min-height: 600px; }
-  .hero-img { width: 82%; height: 205px; }
+  .hero-img { width: 82%; }
   .product-grid { grid-template-columns: 1fr; }
-  .product-image-wrap img { height: 190px; }
-  .coll-yellow img, .coll-lav img { width: 36%; height: 130px; }
+  .collection-img { width: 36%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

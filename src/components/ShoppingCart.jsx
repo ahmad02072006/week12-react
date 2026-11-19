@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { products } from '../data/products';
+import ShoeImage from './ShoeImage';
 
 const money = (n) => `$${n.toFixed(2)}`;
 
@@ -7,7 +8,10 @@ function ProductCard({ product, qtyInCart, onAdd, onRemove }) {
   return (
     <article className="product">
       <div className="product-image-wrap">
-        <img src={product.image} alt={`${product.name} sneaker`} loading="lazy" />
+        <ShoeImage
+          src={product.image}
+          alt={product.imageAlt}
+        />
         <span className="discount-badge">{product.discount}</span>
       </div>
       <div className="product-details">
@@ -38,7 +42,11 @@ function ProductCard({ product, qtyInCart, onAdd, onRemove }) {
 function CartItem({ item, onIncrease, onDecrease }) {
   return (
     <li className="cart-item">
-      <img src={item.image} alt={item.name} />
+      <ShoeImage
+        className="cart-item-image"
+        src={item.image}
+        alt={item.imageAlt}
+      />
       <div className="cart-info">
         <strong>{item.name}</strong>
         <span>{money(item.price)} each</span>
