@@ -1,9 +1,5 @@
-import CounterWithHistory from './components/CounterWithHistory';
-import TodoList from './components/TodoList';
-import SearchPage from './components/SearchPage';
-import WordCount from './components/WordCount';
-import SearchPage from './components/SearchPage';
-import WordCount from './components/WordCount';
+import { useState } from 'react';
+import ShoppingCart from './components/ShoppingCart';
 import Countdown from './components/Countdown';
 import ShoeImage from './components/ShoeImage';
 
@@ -148,8 +144,6 @@ function App() {
             <ShoppingCart onCartCountChange={setCartCount} />
           </Section>
         </section>
-
-       
       </main>
 
       <footer className="footer">
