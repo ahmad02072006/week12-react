@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import ShoppingCart from './components/ShoppingCart';
 import CounterWithHistory from './components/CounterWithHistory';
 import TodoList from './components/TodoList';
+import SearchPage from './components/SearchPage';
+import WordCount from './components/WordCount';
 import SearchPage from './components/SearchPage';
 import WordCount from './components/WordCount';
 import Countdown from './components/Countdown';
@@ -51,6 +51,7 @@ function App() {
             StrideLab
           </a>
           <nav className="pill-nav" aria-label="Main navigation">
+            <a href={import.meta.env.BASE_URL}>All tasks</a>
             <a href="#home">Home</a>
             <a href="#collections">Collections</a>
             <a href="#shop">Shop</a>
@@ -148,23 +149,7 @@ function App() {
           </Section>
         </section>
 
-        <section id="demos" className="container">
-          <h2 className="big-title">More React state demos</h2>
-          <div className="grid-2">
-            <Section id="counter" title="Counter with History" subtitle="Two state variables + undo.">
-              <CounterWithHistory />
-            </Section>
-            <Section id="todo" title="Todo List" subtitle="State with arrays.">
-              <TodoList />
-            </Section>
-            <Section id="search" title="Search (Lifting State Up)" subtitle="Parent owns the query.">
-              <SearchPage />
-            </Section>
-            <Section id="words" title="Live Word Count" subtitle="Practice: textarea + useState.">
-              <WordCount />
-            </Section>
-          </div>
-        </section>
+       
       </main>
 
       <footer className="footer">
